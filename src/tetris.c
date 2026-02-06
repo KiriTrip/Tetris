@@ -111,3 +111,16 @@ static int random_tetromino(void)
     return rand() % NUM_TETROMINOS;
 }
 
+static void tg_new_falling(tetris_game *obj)
+{
+    obj->falling = obj->next;
+    obj->next.typ = random_tetromino();
+    obj->next.ori = 0;
+    obj->next.loc.row = 0;
+    obj->next.loc.col = obj->cols/2 - 2;
+}
+
+static void tg_do_gravity_tick(tetris_game *obj)
+{
+    obj->ticks_till_gravity--;
+}
